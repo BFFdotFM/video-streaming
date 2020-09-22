@@ -25,4 +25,8 @@ ffmpeg -ss $ts \
        -b:v 2500k -maxrate 2500k -bufsize 2500k \
        -filter:v scale="trunc(oh*a/2)*2:720" \
        -sws_flags lanczos+accurate_rnd \
-       -acodec aac -b:a 192k -ar 48000 -ac 2 -f flv rtmp://live.twitch.tv/app/$2
+       -acodec aac -b:a 192k -ar 48000 -ac 2\
+# Twitch
+#       -f flv rtmp://live.twitch.tv/app/$2 \
+# YouTube Live
+       -f flv rtmp://a.rtmp.youtube.com/live2/$2

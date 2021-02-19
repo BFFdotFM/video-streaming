@@ -2,7 +2,7 @@
 
 # Script to stream a video file at 720p to Twitch, via FFMPEg.
 #
-# * Bias to higher audio quality
+# * Bias to higher audio quality
 #
 # Usage:
 #
@@ -21,12 +21,9 @@ fi
 
 ffmpeg -ss $ts \
        -re -i $1 \
-       -vcodec libx264 -profile:v main -preset:v medium -r 30 -g 60 -keyint_min 60 -sc_threshold 0 \
-       -b:v 2500k -maxrate 2500k -bufsize 2500k \
-       -filter:v scale="trunc(oh*a/2)*2:720" \
-       -sws_flags lanczos+accurate_rnd \
-       -acodec aac -b:a 192k -ar 48000 -ac 2\
+# Include audio coded as-per encode.sh, else ffmpeg defaults to transcoding it to MP3
+       -acodec aac -b:a 192k -ar 44100 -ac 2 \
 # Twitch
 #       -f flv rtmp://live.twitch.tv/app/$2 \
 # YouTube Live
-       -f flv rtmp://a.rtmp.youtube.com/live2/$2
+#       -f flv rtmp://a.rtmp.youtube.com/live2/$2
